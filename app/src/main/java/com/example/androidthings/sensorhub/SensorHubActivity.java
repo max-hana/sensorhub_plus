@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.androidthings.sensorhub.collector.Bmx280Collector;
+import com.example.androidthings.sensorhub.collector.Lsm9ds1Collector;
 import com.example.androidthings.sensorhub.collector.MotionCollector;
 import com.example.androidthings.sensorhub.iotcore.SensorHub;
 
@@ -71,8 +72,10 @@ public class SensorHubActivity extends Activity {
         sensorHub = new SensorHub(params);
         sensorHub.registerSensorCollector(new Bmx280Collector(
                 BoardDefaults.getI2cBusForSensors()));
-        sensorHub.registerSensorCollector(new MotionCollector(
-                BoardDefaults.getGPIOForMotionDetector()));
+//        sensorHub.registerSensorCollector(new MotionCollector(
+//                BoardDefaults.getGPIOForMotionDetector()));
+        sensorHub.registerSensorCollector(new Lsm9ds1Collector(
+                BoardDefaults.getI2cBusForSensors()));
 
         try {
             sensorHub.start();
