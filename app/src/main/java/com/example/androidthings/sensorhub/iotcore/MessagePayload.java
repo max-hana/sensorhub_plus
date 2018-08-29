@@ -58,6 +58,34 @@ public class MessagePayload {
     }
 
     /**
+     * Serialize a List of SensorData objects into a JSON string, for sending to the cloud
+     * @param data List of SensorData objects to serialize
+     * @return JSON String
+     */
+    public static String createTelemetryMessagePayload_FLAT(List<SensorData> data, String deviceId) {
+        try {
+            //JSONObject messagePayload = new JSONObject();
+            //JSONArray dataArray = new JSONArray();
+            JSONObject sensor = new JSONObject();
+            sensor.put("device_id", deviceId);
+            //sensor.put("data", deviceId);
+            for (SensorData el : data) {
+                com.google.api.client.util.DateTime dt = new com.google.api.client.util.DateTime(el.getTimestamp());
+                sensor.put("datetime", dt.toStringRfc3339().substring(0,19)
+                );
+                sensor.put(el.getSensorName(), Float.toString(el.getValue() ) );
+                //dataArray.put(sensor);
+            }
+            //dataArray.put(sensor);
+            //messagePayload.put("data", dataArray);
+            //return messagePayload.toString();
+            return sensor.toString();
+        } catch (JSONException e) {
+            throw new IllegalArgumentException("Invalid message", e);
+        }
+    }
+
+    /**
      * Compose and serialize some parameters as a JSON string, for sending to the IotCore as a
      * device state update
      * @return JSON String
@@ -105,6 +133,7 @@ public class MessagePayload {
             for (int i = 0; i < activeSensors.length(); i++) {
                 deviceConfig.activeSensors[i] = activeSensors.getString(i);
             }
+            deviceConfig.alert = message.getString("alert");
             return deviceConfig;
         } catch (JSONException e) {
             throw new IllegalArgumentException("Invalid message: \"" + jsonPayload + "\"", e);
@@ -116,6 +145,7 @@ public class MessagePayload {
         public int telemetryEventsPerHour;
         public int stateUpdatesPerHour;
         public String[] activeSensors;
+        public String alert = "OFF";
 
         @Override
         public String toString() {
@@ -124,6 +154,7 @@ public class MessagePayload {
                     ", telemetryEventsPerHour=" + telemetryEventsPerHour +
                     ", stateUpdatesPerHour=" + stateUpdatesPerHour +
                     ", activeSensors=" + Arrays.toString(activeSensors) +
+                    ", Alert=" + Arrays.toString(activeSensors) +
                     '}';
         }
     }

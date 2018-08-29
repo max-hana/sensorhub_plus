@@ -98,7 +98,19 @@ public class Lsm9ds1Collector implements SensorCollector {
 
     @Override
     public void setEnabled(String sensor, boolean enabled) {
-        Log.w(TAG, "Cannot set sensor " + sensor + " to " + enabled + ". Ignoring request");
+            switch (sensor) {
+                case SENSOR_ACCEL:
+                    isAccelerometerEnabled = true;
+                    return;
+                case SENSOR_GYROL:
+                    isGyroEnabled = true;
+                    return;
+                case SENSOR_MAG:
+                    isMagnetEnabled = true;
+                    return;
+                default:
+                    Log.w(TAG, "Cannot set sensor " + sensor + " to " + enabled + ". Ignoring request");
+            }
     }
 
 
