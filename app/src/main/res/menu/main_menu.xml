@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/show_chart"
+        android:layout_width="wrap_content"
+        android:checkable="false"
+        android:icon="@android:drawable/btn_dialog"
+        android:showAsAction="never"
+        android:title="show chart" />
+
+    <item
+        android:id="@+id/exit_app"
+        android:checkable="false"
+        android:icon="@android:drawable/btn_dialog"
+        android:showAsAction="never"
+        android:title="exit this app" />
+</menu>

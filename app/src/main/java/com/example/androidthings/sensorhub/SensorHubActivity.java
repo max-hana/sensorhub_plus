@@ -19,12 +19,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.example.androidthings.sensorhub.collector.Bmx280Collector;
 import com.example.androidthings.sensorhub.collector.Lsm9ds1Collector;
 import com.example.androidthings.sensorhub.collector.MotionCollector;
 import com.example.androidthings.sensorhub.iotcore.SensorHub;
+
+import com.example.androidthings.sensorhub.chart.MultiLineChartActivity;
+
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -36,6 +43,35 @@ public class SensorHubActivity extends Activity {
     private static final String CONFIG_SHARED_PREFERENCES_KEY = "cloud_iot_config";
 
     private SensorHub sensorHub;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+        //return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+              case R.id.exit_app:
+                System.exit(0);
+                break;
+            case R.id.show_chart:
+                Intent intent1  = new Intent(this, MultiLineChartActivity.class);
+                this.startActivity(intent1);
+                //return true;
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onNewIntent(Intent intent) {

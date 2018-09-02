@@ -43,7 +43,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class SensorHub {
     private static final String TAG = "sensorhub";
 
-    private static final int DEFAULT_TELEMETRY_PER_HOUR = 60*3; // every 20 seconds
+//    private static final int DEFAULT_TELEMETRY_PER_HOUR = 60*3; // every 20 seconds
+//    private static final int DEFAULT_STATE_UPDATES_PER_HOUR = 60; // every minute
+    private static final int DEFAULT_TELEMETRY_PER_HOUR = 60*20; // every 20 seconds
     private static final int DEFAULT_STATE_UPDATES_PER_HOUR = 60; // every minute
 
     private HandlerThread backgroundThread;
