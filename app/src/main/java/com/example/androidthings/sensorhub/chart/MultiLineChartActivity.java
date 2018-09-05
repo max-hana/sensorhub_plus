@@ -4,6 +4,7 @@ package com.example.androidthings.sensorhub.chart;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -43,6 +44,8 @@ public class MultiLineChartActivity extends FragmentActivity implements OnSeekBa
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //setContentView(R.layout.activity_linechart);
         setContentView(R.layout.activity_linechart_noseekbar);
+
+
 //
 //        tvX = findViewById(R.id.tvXMax);
 //        tvY = findViewById(R.id.tvYMax);
@@ -95,11 +98,19 @@ public class MultiLineChartActivity extends FragmentActivity implements OnSeekBa
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
+        int id = item.getItemId();
+
+        switch (id) {
             case R.id.go_back1:
                 super.onBackPressed();
                 //overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
                 break;
+
+            case 16908332 : // R.id.home:
+                super.onBackPressed();
+                //overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
+                break;
+
 //            case R.id.actionToggleValues: {
 //                List<ILineDataSet> sets = mChart.getData()
 //                        .getDataSets();
@@ -210,6 +221,12 @@ public class MultiLineChartActivity extends FragmentActivity implements OnSeekBa
 //                values.add(new Entry(i, (float) val));
 //            }
 
+            for ( int i = 0; i< 100; i++)
+            {
+                double val = (Math.random() );
+                values.add(new Entry(i, (float) val));
+            }
+
             LineDataSet d = new LineDataSet(values, "DataSet " + (z + 1));
             d.setLineWidth(2.5f);
             d.setCircleRadius(4f);
@@ -250,4 +267,6 @@ public class MultiLineChartActivity extends FragmentActivity implements OnSeekBa
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
     }
+
+
 }
