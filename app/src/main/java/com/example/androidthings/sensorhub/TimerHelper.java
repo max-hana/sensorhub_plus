@@ -37,7 +37,8 @@ public class TimerHelper {
     }
 
     public static long calculateNextRun(long eventsPerHour, long lastRun) {
-        return lastRun + 60*60*1000L/eventsPerHour;
+        //return lastRun + 60*60*1000L/eventsPerHour; // 1.0s
+        return lastRun + 60*60*500L/eventsPerHour; // 0.5s
     }
 
     public static boolean canExecute(String loopType, boolean isReady) {
