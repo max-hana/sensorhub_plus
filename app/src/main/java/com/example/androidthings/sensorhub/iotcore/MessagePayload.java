@@ -136,7 +136,9 @@ public class MessagePayload {
             deviceConfig.alert = message.getString("alert");
             return deviceConfig;
         } catch (JSONException e) {
-            throw new IllegalArgumentException("Invalid message: \"" + jsonPayload + "\"", e);
+            throw new IllegalArgumentException("Invalid message1: \"" + jsonPayload + "\"", e);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid message2: \"" + jsonPayload + "\"", e);
         }
     }
 
